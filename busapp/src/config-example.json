@@ -1,0 +1,5 @@
+{
+	"GMAPS_KEY": "DEADBEEF",
+	"APP_ID": "amzn1.echo-sdk-ams.app.[your-unique-value-here]",
+	"urlPrefix": "https://maps.googleapis.com/maps/api/directions/json?origin=+San+Diego,+CA,+USA&destination=+Los+Angeles,+CA,+USA&sensor=false&mode=transit&key="
+}
