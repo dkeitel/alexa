@@ -67,7 +67,16 @@ NextBusSkill.prototype.eventHandlers.onSessionStarted = function (sessionStarted
 
 NextBusSkill.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
     console.log("NextBusSkill onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
-    getWelcomeResponse(response);
+    getJsonEventsFromGoogleMaps(function (events) {
+        var speechText = events.replace(/Dr/g, "Drive");
+        if (events.length == 0) {
+            speechText = "There is a problem connecting with Google Maps. Please try again later.";
+            response.tell(speechText);
+        } else {
+            speechText = speechText;
+            response.tellWithCard(speechText, "Next Bus", speechText);
+        }
+    });
 };
 
 NextBusSkill.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
@@ -87,48 +96,26 @@ NextBusSkill.prototype.intentHandlers = {
         var speechOutput = "With Next Bus, you can query Google Maps for the next bus.  " +
             "For example, you could say get me the next bus to school.";
         response.ask(speechOutput);
-    },
-
-    FinishIntent: function (intent, session, response) {
-        var speechOutput = "Goodbye";
-        response.tell(speechOutput);
     }
 };
-
-/**
- * Function to handle the onLaunch skill behavior
- */
-
-function getWelcomeResponse(response) {
-    // If we wanted to initialize the session to have some attributes we could add those here.
-    var sessionAttributes = {};
-    var cardTitle = "The Next Bus";
-    var repromptText = "With Next Bus, you can query Google Maps for the next bus.  " +
-            "For example, you could say get me the next bus to school.";
-    var speechOutput = "Next bus, what time is the next one?";
-    // If the user either does not reply to the welcome message or says something that is not
-    // understood, they will be prompted again with this text.
-
-    response.askWithCard(speechOutput, repromptText, cardTitle, speechOutput);
-}
 
 /**
  * Gets a poster prepares the speech to reply to the user.
  */
 function handleFirstEventRequest(intent, session, response) {
-    var destinationSlot = intent.slots.destination;
+    //var destinationSlot = intent.slots.destination;
     var repromptText = "With Next Bus, you can query Google Maps for the next bus.  " +
             "For example, you could say get me the next bus to school.";
     var sessionAttributes = {};
 
     getJsonEventsFromGoogleMaps(function (events) {
-        var speechText = events;
+        var speechText = events.replace(/Dr/g, "Drive");
         if (events.length == 0) {
-            speechText = "There is a problem connecting to Wikipedia at this time. Please try again later.";
+            speechText = "There is a problem connecting with Google Maps. Please try again later.";
             response.tell(speechText);
         } else {
             speechText = speechText;
-            response.askWithCard(speechText, repromptText, "Next Bus", speechText);
+            //response.askWithCard(speechText, ' ', "Next Bus", speechText);
         }
     });
 }

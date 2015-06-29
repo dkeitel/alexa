@@ -1,11 +1,7 @@
 GetFirstEventIntent get the next bus to {school|destination}
 GetFirstEventIntent when is the next bus to {school|destination}
 GetFirstEventIntent get me the next bus to {school|destination}
-
-FinishIntent no
-FinishIntent nope
-FinishIntent no thanks
-FinishIntent no thank you
+GetFirstEventIntent when is the next bus
 
 HelpIntent help
 HelpIntent help me

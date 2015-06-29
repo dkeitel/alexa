@@ -2,19 +2,10 @@
   "intents": [
     {
       "intent": "GetFirstEventIntent",
-      "slots": [
-        {
-          "name": "destination",
-          "type": "LITERAL"
-        }
-      ]
-    },
-    {
-      "intent": "HelpIntent",
       "slots": []
     },
     {
-      "intent": "FinishIntent",
+      "intent": "HelpIntent",
       "slots": []
     }
   ]
