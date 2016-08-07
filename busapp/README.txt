@@ -38,6 +38,8 @@ To run this example skill you need to do two things. The first is to deploy the 
 ## Examples
 Example user interactions:
 
+Test commit
+
 ### One-shot model:
   User:  "Alexa, ask History Buff what happened on August thirtieth."
   Alexa: "For August thirtieth, in 2003, [...] . Wanna go deeper in history?"
